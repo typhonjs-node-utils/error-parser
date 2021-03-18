@@ -1,6 +1,6 @@
 {
   "name": "@typhonjs-node-utils/error-parser",
-  "description": "Normalizes error stacks from V8",
+  "description": "Parses / filters / normalizes Error stacks from V8",
   "version": "0.0.0",
   "author": "typhonrt",
   "type": "module",
