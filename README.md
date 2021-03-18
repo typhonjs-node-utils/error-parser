@@ -1,2 +1,2 @@
-# sanitize-error
-Sanitizes / normalizes Error stacks from V8
+# error-parser
+Parses / filters / normalizes Error stacks from V8

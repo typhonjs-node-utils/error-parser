@@ -1,5 +1,5 @@
 {
-  "name": "@typhonjs-node-utils/normalize-error",
+  "name": "@typhonjs-node-utils/error-parser",
   "description": "Normalizes error stacks from V8",
   "version": "0.0.0",
   "author": "typhonrt",
@@ -37,7 +37,7 @@
     "/npm-shrinkwrap.json",
     "/src"
   ],
-  "homepage": "https://github.com/typhonjs-node-utils/normalize-error",
+  "homepage": "https://github.com/typhonjs-node-utils/error-parser",
   "keywords": [
     "typhonjs",
     "error",
@@ -46,8 +46,8 @@
     "filter"
   ],
   "license": "MPL-2.0",
-  "repository": "typhonjs-node-utils/normalize-error",
-  "bugs": "https://github.com/typhonjs-node-utils/normalize-error/issues",
+  "repository": "typhonjs-node-utils/error-parser",
+  "bugs": "https://github.com/typhonjs-node-utils/error-parser/issues",
   "scripts": {
     "eslint": "eslint .",
     "posttest": "npm run eslint",
