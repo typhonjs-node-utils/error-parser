@@ -332,7 +332,7 @@ export default class ErrorParser
     *
     * @param {Error} error - A V8 Error.
     *
-    * @returns {ErrorStack} A parsed ErrorStack instance.
+    * @returns {ParsedError} A parsed ErrorStack instance.
     */
    normalize(error)
    {
@@ -420,7 +420,7 @@ export default class ErrorParser
    /**
     * Wires up Logger on the plugin eventbus.
     *
-    * @param {PluginEvent} ev - The plugin event.
+    * @param {object} ev - PluginEvent - The plugin event.
     *
     * @see https://www.npmjs.com/package/typhonjs-plugin-manager
     *

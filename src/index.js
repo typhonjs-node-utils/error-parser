@@ -1,4 +1,4 @@
-import ErrorParser      from './plugin/ErrorParser.js';
+import ErrorParser                     from './plugin/ErrorParser.js';
 
 export { default as normalizeError }   from './util/normalizeError.js';
 export { ErrorParser };

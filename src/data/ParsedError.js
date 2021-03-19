@@ -15,9 +15,9 @@ export default class ParsedError
 
    get firstEntry() { return this._stack.length > 0 ? this._stack[0] : void 0; }
 
-   get firstFilePath() { return this._stack.length > 0 ? this._stack[0].filePath : void 0; }
+   get firstFilepath() { return this._stack.length > 0 ? this._stack[0].filePath : void 0; }
 
-   get uniqueFilePaths()
+   get uniqueFilepaths()
    {
       const uniqueFilePaths = new Set();
       const results = [];

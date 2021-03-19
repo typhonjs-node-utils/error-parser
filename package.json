@@ -1,7 +1,7 @@
 {
   "name": "@typhonjs-node-utils/error-parser",
   "description": "Parses / filters / normalizes Error stacks from V8",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "typhonrt",
   "type": "module",
   "main": "src/index.js",
@@ -22,16 +22,10 @@
     "upath": "^2.0.0"
   },
   "devDependencies": {
-    "@typhonjs-config/eslint-config": "^0.2.0",
-    "c8": "^7.0.0",
-    "chai": "^4.0.0",
-    "codecov": "^3.0.0",
-    "eslint": "^7.0.0",
-    "mocha": "^8.0.0"
+    "@typhonjs-node-utils/build-test": "^0.1.0"
   },
   "engines": {
-    "node": ">=14.0.0",
-    "npm": ">=7.0.0"
+    "node": ">=12.0.0"
   },
   "files": [
     "/npm-shrinkwrap.json",
