@@ -1,12 +1,16 @@
+import { v5 as uuidv5 } from 'uuid';
+
 export default class ParsedError
 {
-   constructor(error, stack)
+   constructor(error, stack, namespace)
    {
       this._error = error;
       this._stack = stack;
 
       this._name = error.name;
       this._message = error.message;
+
+      this._uuid = uuidv5(this.toString(), namespace);
    }
 
    get error() { return this._error; }
@@ -15,7 +19,7 @@ export default class ParsedError
 
    get firstEntry() { return this._stack.length > 0 ? this._stack[0] : void 0; }
 
-   get firstFilepath() { return this._stack.length > 0 ? this._stack[0].filePath : void 0; }
+   get firstFilepath() { return this._stack.length > 0 ? this._stack[0].filepath : void 0; }
 
    get uniqueFilepaths()
    {
@@ -24,15 +28,17 @@ export default class ParsedError
 
       for (const entry of this.stack)
       {
-         if (!uniqueFilePaths.has(entry.filePath))
+         if (!uniqueFilePaths.has(entry.filepath))
          {
-            results.push(entry.filePath);
-            uniqueFilePaths.add(entry.filePath);
+            results.push(entry.filepath);
+            uniqueFilePaths.add(entry.filepath);
          }
       }
 
       return results;
    }
+
+   get uuid() { return this._uuid; }
 
    toString({ limit = Number.MAX_SAFE_INTEGER, noLineCol = false } = {})
    {
@@ -46,7 +52,7 @@ export default class ParsedError
       for (let cntr = 0; cntr < max; cntr++)
       {
          const entry = this._stack[cntr];
-         result += `  at ${entry.callSource} (${entry.filePath}`;
+         result += `  at ${entry.callsource} (${entry.filepath}`;
          result += noLineCol ? ')\r\n' : `:${entry.line}:${entry.col})\r\n`;
       }
 

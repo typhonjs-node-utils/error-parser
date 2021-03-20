@@ -8,6 +8,7 @@
   "module": "src/index.js",
   "exports": {
     ".": "./src/index.js",
+    "./defaultNamespace": "./src/data/defaultNamespace.js",
     "./ErrorParser": "./src/plugin/ErrorParser.js",
     "./normalizeError": "./src/util/normalizeError.js"
   },
@@ -19,7 +20,8 @@
     }
   ],
   "dependencies": {
-    "upath": "^2.0.0"
+    "upath": "^2.0.0",
+    "uuid": "^8.0.0"
   },
   "devDependencies": {
     "@typhonjs-node-utils/build-test": "^0.1.0"

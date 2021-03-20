@@ -1,7 +1,10 @@
-import ParsedError      from '../data/ParsedError.js';
-import TraceFilter      from './TraceFilter.js';
+import { validate }     from 'uuid';
 
+import defaultNamespace from '../data/defaultNamespace.js';
 import normalizeError   from '../util/normalizeError.js';
+import ParsedError      from '../data/ParsedError.js';
+import { stackParams }  from '../util/normalizeError.js';
+import TraceFilter      from './TraceFilter.js';
 
 /**
  * Provides ErrorParserOptions
@@ -166,23 +169,23 @@ export default class ErrorParser
    }
 
    /**
-    * Generates log information from where the logger invocation originated.
+    * Normalizes then filters the error stack and produces a filtered ParsedError.
     *
-    * @param {object}   data - An object.
+    * @param {object}   options - An object.
     *
-    * @param {Error}    data.error - An optional Error to trace instead of artificially generating one.
+    * @param {Error}    options.error - An optional Error to trace instead of artificially generating one.
     *
-    * @param {string}   [data.filterParam='unixPath'] - A parameter from ErrorStack.
+    * @param {string}   [options.filterParam='unixPath'] - A parameter from ErrorStack.
     *
-    * @param {number}   [data.limit=Number.MAX_SAFE_INTEGER] - An integer zero or above.
+    * @param {number}   [options.limit=Number.MAX_SAFE_INTEGER] - An integer zero or above.
+    *
+    * @param {string}   [options.namespace] - A UUID namespace string. A default namespace is provided.
     *
     * @returns {ParsedError} A filtered ParsedError instance.
     *
     */
-   filter({ error, filterParam = 'unixPath', limit = Number.MAX_SAFE_INTEGER } = {})
+   filter({ error, filterParam = 'unixpath', limit = Number.MAX_SAFE_INTEGER, namespace = defaultNamespace } = {})
    {
-      const filterEntries = [];
-
       if (!(error instanceof Error) && typeof error.stack !== 'string')
       {
          throw new TypeError(`'error' is not an instance of 'Error'.`);
@@ -190,9 +193,21 @@ export default class ErrorParser
 
       if (typeof filterParam !== 'string') { throw new TypeError(`'filterParam' is not a 'string'.`); }
 
+      if (!stackParams.includes(filterParam))
+      {
+         throw new Error(`'filterParam' must be one of the following strings: \n${JSON.stringify(stackParams)}.`);
+      }
+
       if (!Number.isInteger(limit) || limit < 0) { throw new TypeError(`'limit' is not a positive 'integer'.`); }
 
-      const parsed = this.normalize(error);
+      if (!validate(namespace))
+      {
+         throw new TypeError(`'namespace' is not a valid UUID namespace.`);
+      }
+
+      const filterEntries = [];
+
+      const parsed = normalizeError({ error, namespace });
 
       const stackLimit = Math.min(limit, parsed.stack.length);
 
@@ -205,7 +220,7 @@ export default class ErrorParser
          filterEntries.push(entry);
       }
 
-      return new ParsedError(error, filterEntries);
+      return new ParsedError(error, filterEntries, namespace);
    }
 
    /**
@@ -330,13 +345,17 @@ export default class ErrorParser
    /**
     * Normalizes the error.
     *
-    * @param {Error} error - A V8 Error.
+    * @param {object}   options - An object.
+    *
+    * @param {Error}    options.error - An optional Error to trace instead of artificially generating one.
+    *
+    * @param {string}   [options.namespace] - A UUID namespace string. A default namespace is provided.
     *
     * @returns {ParsedError} A parsed ErrorStack instance.
     */
-   normalize(error)
+   normalize(options)
    {
-      return normalizeError(error);
+      return normalizeError(options);
    }
 
    /**
@@ -448,6 +467,7 @@ export default class ErrorParser
       this._eventbus.on(`typhonjs:util:error:parser:filter:enabled:set`, this.setFilterEnabled, this);
       this._eventbus.on(`typhonjs:util:error:parser:filter:remove`, this.removeFilter, this);
       this._eventbus.on(`typhonjs:util:error:parser:filter:remove:all`, this.removeAllFilters, this);
+      this._eventbus.on(`typhonjs:util:error:parser:normalize`, this.normalize, this);
       this._eventbus.on(`typhonjs:util:error:parser:options:get`, this.getOptions, this);
       this._eventbus.on(`typhonjs:util:error:parser:options:set`, this.setOptions, this);
 

@@ -7,19 +7,22 @@ describe(`normalizeError`, () =>
 {
    it(`toString`, () =>
    {
-      const stack = normalizeError(new Error('TEST - ERROR'));
-      console.log(stack.toString({ limit: 3 }));
+      const parsedError = normalizeError({ error: new Error('TEST - ERROR') });
+      console.log(parsedError.toString({ limit: 3 }));
+      console.log(`UUID: ${parsedError.uuid}`);
    });
 
    it(`uniqueFilePaths`, () =>
    {
-      const stack = normalizeError(new Error('TEST - ERROR'));
-      console.log(JSON.stringify(stack.uniqueFilePaths, null, 3));
+      const parsedError = normalizeError({ error: new Error('TEST - ERROR') });
+      console.log(JSON.stringify(parsedError.uniqueFilepaths, null, 3));
+      console.log(`UUID: ${parsedError.uuid}`);
    });
 
    it(`firstFilePath`, () =>
    {
-      const stack = normalizeError(new Error('TEST - ERROR'));
-      console.log(stack.firstFilePath);
+      const parsedError = normalizeError({ error: new Error('TEST - ERROR') });
+      console.log(parsedError.firstFilepath);
+      console.log(`UUID: ${parsedError.uuid}`);
    });
 });
