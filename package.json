@@ -20,6 +20,7 @@
     }
   ],
   "dependencies": {
+    "clean-stack": "^3.0.0",
     "upath": "^2.0.0",
     "uuid": "^8.0.0"
   },

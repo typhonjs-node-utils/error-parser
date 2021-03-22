@@ -1,6 +1,7 @@
 import path             from 'path';
 import url              from 'url';
 
+import cleanStack       from 'clean-stack';
 import upath            from 'upath';
 import { validate }     from 'uuid';
 import defaultNamespace from '../data/defaultNamespace.js';
@@ -36,10 +37,13 @@ export default function normalizeError({ error, namespace = defaultNamespace } =
       throw new TypeError(`'namespace' is not a valid UUID namespace.`);
    }
 
+   // Clean any Node internal references from error stack.
+   const stack = cleanStack(error.stack || '');
+
    const results = [];
 
    // split stack.
-   const splitStack = error.stack.split('\n');
+   const splitStack = stack.split('\n');
 
    splitStack.shift();
 
@@ -64,9 +68,6 @@ export default function normalizeError({ error, namespace = defaultNamespace } =
       const filepath = matchpath.length >= 1 ? matchpath[1] : '';
       const line = matchpath.length >= 2 ? matchpath[2] : '';
       const col = matchpath.length >= 3 ? matchpath[3] : '';
-
-      // Skip any internal Node stack.
-      if (filepath.startsWith('internal')) { continue; }
 
       const dirpath = path.dirname(filepath);
 
