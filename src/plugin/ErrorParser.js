@@ -459,17 +459,17 @@ export default class ErrorParser
          if (Array.isArray(options.filterConfigs)) { this.addFilters(options.filterConfigs); }
       }
 
-      this._eventbus.on(`typhonjs:util:error:parser:filter`, this.filter, this);
-      this._eventbus.on(`typhonjs:util:error:parser:filter:add`, this.addFilter, this);
-      this._eventbus.on(`typhonjs:util:error:parser:filter:data:get:all`, this.getAllFilterData, this);
-      this._eventbus.on(`typhonjs:util:error:parser:filter:data:get`, this.getFilterData, this);
-      this._eventbus.on(`typhonjs:util:error:parser:filter:enabled:get`, this.getFilterEnabled, this);
-      this._eventbus.on(`typhonjs:util:error:parser:filter:enabled:set`, this.setFilterEnabled, this);
-      this._eventbus.on(`typhonjs:util:error:parser:filter:remove`, this.removeFilter, this);
-      this._eventbus.on(`typhonjs:util:error:parser:filter:remove:all`, this.removeAllFilters, this);
-      this._eventbus.on(`typhonjs:util:error:parser:normalize`, this.normalize, this);
-      this._eventbus.on(`typhonjs:util:error:parser:options:get`, this.getOptions, this);
-      this._eventbus.on(`typhonjs:util:error:parser:options:set`, this.setOptions, this);
+      this._eventbus.on(`typhonjs:utils:error:parser:filter`, this.filter, this, true);
+      this._eventbus.on(`typhonjs:utils:error:parser:filter:add`, this.addFilter, this, true);
+      this._eventbus.on(`typhonjs:utils:error:parser:filter:data:get:all`, this.getAllFilterData, this, true);
+      this._eventbus.on(`typhonjs:utils:error:parser:filter:data:get`, this.getFilterData, this, true);
+      this._eventbus.on(`typhonjs:utils:error:parser:filter:enabled:get`, this.getFilterEnabled, this, true);
+      this._eventbus.on(`typhonjs:utils:error:parser:filter:enabled:set`, this.setFilterEnabled, this, true);
+      this._eventbus.on(`typhonjs:utils:error:parser:filter:remove`, this.removeFilter, this, true);
+      this._eventbus.on(`typhonjs:utils:error:parser:filter:remove:all`, this.removeAllFilters, this, true);
+      this._eventbus.on(`typhonjs:utils:error:parser:normalize`, this.normalize, this, true);
+      this._eventbus.on(`typhonjs:utils:error:parser:options:get`, this.getOptions, this, true);
+      this._eventbus.on(`typhonjs:utils:error:parser:options:set`, this.setOptions, this, true);
 
       // Add plugin auto filter support for added plugins.
       this._eventbus.on('typhonjs:plugin:manager:plugin:added', (data) =>
