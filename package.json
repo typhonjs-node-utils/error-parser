@@ -1,8 +1,8 @@
 {
-  "name": "@typhonjs-node-utils/error-parser",
-  "description": "Parses / filters / normalizes Error stacks from V8",
-  "version": "0.0.3",
-  "author": "typhonrt",
+  "name": "@typhonjs-utils/error-parser",
+  "description": "Parses / filters / normalizes Error stacks from V8.",
+  "version": "0.0.4",
+  "author": "Michael Leahy <support@typhonjs.io> (https://github.com/typhonrt)",
   "type": "module",
   "main": "src/index.js",
   "module": "src/index.js",
@@ -12,12 +12,8 @@
     "./ErrorParser": "./src/plugin/ErrorParser.js",
     "./normalizeError": "./src/util/normalizeError.js"
   },
-  "maintainers": [
-    {
-      "name": "Michael Leahy",
-      "email": "support@typhonjs.io",
-      "url": "https://github.com/typhonrt"
-    }
+  "contributors": [
+    "Michael Leahy <support@typhonjs.io> (https://github.com/typhonrt)"
   ],
   "dependencies": {
     "clean-stack": "^3.0.0",
@@ -25,7 +21,7 @@
     "uuid": "^8.0.0"
   },
   "devDependencies": {
-    "@typhonjs-node-utils/build-test": "^0.1.0"
+    "@typhonjs-utils/build-test": "^0.1.0"
   },
   "engines": {
     "node": ">=12.0.0"
@@ -37,6 +33,7 @@
   "homepage": "https://github.com/typhonjs-node-utils/error-parser",
   "keywords": [
     "typhonjs",
+    "utils",
     "error",
     "parser",
     "normalize",
