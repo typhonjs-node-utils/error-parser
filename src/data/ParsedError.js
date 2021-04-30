@@ -21,6 +21,12 @@ export default class ParsedError
 
    get firstFilename() { return this._stack.length > 0 ? this._stack[0].filename : void 0; }
 
+   get firstFilenameLineCol()
+   {
+      return this._stack.length > 0 ? `${this._stack[0].filename}:${this._stack[0].line}:${this._stack[0].col}` :
+       void 0;
+   }
+
    get firstFilepath() { return this._stack.length > 0 ? this._stack[0].filepath : void 0; }
 
    get uniqueFilepaths()
