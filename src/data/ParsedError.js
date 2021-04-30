@@ -19,6 +19,8 @@ export default class ParsedError
 
    get firstEntry() { return this._stack.length > 0 ? this._stack[0] : void 0; }
 
+   get firstFilename() { return this._stack.length > 0 ? this._stack[0].filename : void 0; }
+
    get firstFilepath() { return this._stack.length > 0 ? this._stack[0].filepath : void 0; }
 
    get uniqueFilepaths()
@@ -46,6 +48,25 @@ export default class ParsedError
       if (typeof noLineCol !== 'boolean') { throw new TypeError(`'noLineCol' is not a 'boolean'.`); }
 
       let result = this._message ? `${this._name}: ${this._message}\r\n` : `${this._name}\r\n`;
+
+      const max = Math.min(limit, this._stack.length);
+
+      for (let cntr = 0; cntr < max; cntr++)
+      {
+         const entry = this._stack[cntr];
+         result += `  at ${entry.callsource} (${entry.filepath}`;
+         result += noLineCol ? ')\r\n' : `:${entry.line}:${entry.col})\r\n`;
+      }
+
+      return result;
+   }
+
+   toStringTrace({ limit = Number.MAX_SAFE_INTEGER, noLineCol = false } = {})
+   {
+      if (!Number.isInteger(limit) || limit < 0) { throw new TypeError(`'limit' is not a positive 'integer'.`); }
+      if (typeof noLineCol !== 'boolean') { throw new TypeError(`'noLineCol' is not a 'boolean'.`); }
+
+      let result = '';
 
       const max = Math.min(limit, this._stack.length);
 

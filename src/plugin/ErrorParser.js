@@ -59,14 +59,20 @@ export default class ErrorParser
 
       this.addFilter({
          type: 'exclusive',
-         name: '@typhonjs-node-utils/error-parser',
-         filterString: '@typhonjs-node-utils/error-parser'
+         name: '@typhonjs-utils/error-parser',
+         filterString: '@typhonjs-utils/error-parser'
       });
 
       this.addFilter({
          type: 'exclusive',
-         name: 'backbone-esnext-events',
-         filterString: 'backbone-esnext-events'
+         name: '@typhonjs-plugin/eventbus',
+         filterString: '@typhonjs-plugin/eventbus'
+      });
+
+      this.addFilter({
+         type: 'exclusive',
+         name: '@typhonjs-plugin/manager',
+         filterString: '@typhonjs-plugin/manager'
       });
 
       this.setOptions(options);
@@ -437,11 +443,11 @@ export default class ErrorParser
    }
 
    /**
-    * Wires up Logger on the plugin eventbus.
+    * Wires up ErrorParser on the plugin eventbus.
     *
-    * @param {object} ev - PluginEvent - The plugin event.
+    * @param {object} ev - PluginInvokeEvent - The plugin event.
     *
-    * @see https://www.npmjs.com/package/typhonjs-plugin-manager
+    * @see https://www.npmjs.com/package/@typhonjs-plugin/manager
     *
     * @ignore
     */
