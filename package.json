@@ -1,7 +1,7 @@
 {
   "name": "@typhonjs-utils/error-parser",
   "description": "Parses / filters / normalizes Error stacks from V8.",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "Michael Leahy <support@typhonjs.io> (https://github.com/typhonrt)",
   "type": "module",
   "main": "src/index.js",
