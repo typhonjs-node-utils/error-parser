@@ -1,4 +1,4 @@
-import { ErrorParser } from '../../src/index.js';
+import ErrorParser   from '../../src/index.js';
 
 /**
  * Tests all of the API errors regarding invoking better errors as an external consumer.
