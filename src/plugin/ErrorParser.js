@@ -457,25 +457,28 @@ export default class ErrorParser
 
       const options = ev.pluginOptions;
 
+      let guard = true;
+
       // Apply any plugin options.
       if (typeof options === 'object')
       {
          this.setOptions(options);
 
          if (Array.isArray(options.filterConfigs)) { this.addFilters(options.filterConfigs); }
+         if (typeof options.guard === 'boolean') { guard = options.guard; }
       }
 
-      this._eventbus.on(`typhonjs:utils:error:parser:filter`, this.filter, this, { guard: true });
-      this._eventbus.on(`typhonjs:utils:error:parser:filter:add`, this.addFilter, this, { guard: true });
-      this._eventbus.on(`typhonjs:utils:error:parser:filter:data:get:all`, this.getAllFilterData, this, { guard: true });
-      this._eventbus.on(`typhonjs:utils:error:parser:filter:data:get`, this.getFilterData, this, { guard: true });
-      this._eventbus.on(`typhonjs:utils:error:parser:filter:enabled:get`, this.getFilterEnabled, this, { guard: true });
-      this._eventbus.on(`typhonjs:utils:error:parser:filter:enabled:set`, this.setFilterEnabled, this, { guard: true });
-      this._eventbus.on(`typhonjs:utils:error:parser:filter:remove`, this.removeFilter, this, { guard: true });
-      this._eventbus.on(`typhonjs:utils:error:parser:filter:remove:all`, this.removeAllFilters, this, { guard: true });
-      this._eventbus.on(`typhonjs:utils:error:parser:normalize`, this.normalize, this, { guard: true });
-      this._eventbus.on(`typhonjs:utils:error:parser:options:get`, this.getOptions, this, { guard: true });
-      this._eventbus.on(`typhonjs:utils:error:parser:options:set`, this.setOptions, this, { guard: true });
+      this._eventbus.on(`typhonjs:utils:error:parser:filter`, this.filter, this, { guard });
+      this._eventbus.on(`typhonjs:utils:error:parser:filter:add`, this.addFilter, this, { guard });
+      this._eventbus.on(`typhonjs:utils:error:parser:filter:data:get:all`, this.getAllFilterData, this, { guard });
+      this._eventbus.on(`typhonjs:utils:error:parser:filter:data:get`, this.getFilterData, this, { guard });
+      this._eventbus.on(`typhonjs:utils:error:parser:filter:enabled:get`, this.getFilterEnabled, this, { guard });
+      this._eventbus.on(`typhonjs:utils:error:parser:filter:enabled:set`, this.setFilterEnabled, this, { guard });
+      this._eventbus.on(`typhonjs:utils:error:parser:filter:remove`, this.removeFilter, this, { guard });
+      this._eventbus.on(`typhonjs:utils:error:parser:filter:remove:all`, this.removeAllFilters, this, { guard });
+      this._eventbus.on(`typhonjs:utils:error:parser:normalize`, this.normalize, this, { guard });
+      this._eventbus.on(`typhonjs:utils:error:parser:options:get`, this.getOptions, this, { guard });
+      this._eventbus.on(`typhonjs:utils:error:parser:options:set`, this.setOptions, this, { guard });
    }
 
    /**
