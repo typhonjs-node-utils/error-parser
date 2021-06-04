@@ -484,7 +484,7 @@ export default class ErrorParser
    /**
     * Removes any trace filters when unloading plugin.
     *
-    * @see https://www.npmjs.com/package/typhonjs-plugin-manager
+    * @see https://www.npmjs.com/package/@typhonjs-plugin/manager
     *
     * @ignore
     */
